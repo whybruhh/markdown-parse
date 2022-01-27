@@ -13,7 +13,8 @@ public class MarkdownParse {
         // find the next [, then find the ], then find the (, then take up to
         // the next )
         int currentIndex = 0;
-        while (currentIndex < markdown.length()) {
+        int x = markdown.length();
+        while (currentIndex < x) {
             int nextOpenBracket = markdown.indexOf("[", currentIndex);
             int nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
             if (nextOpenBracket == -1 || nextCloseBracket == -1) {
@@ -22,6 +23,9 @@ public class MarkdownParse {
             if (markdown.charAt(nextCloseBracket + 1) == '(') {
                 int openParen = markdown.indexOf("(", nextCloseBracket);
                 int closeParen = markdown.indexOf(")", openParen);
+                if (markdown.charAt(closeParen + 1) == ')') {
+                    x -= 1;
+                }
                 toReturn.add(markdown.substring(openParen + 1, closeParen));
                 currentIndex = closeParen + 1;
             } else {
@@ -38,3 +42,15 @@ public class MarkdownParse {
         System.out.println(links);
     }
 }
+
+/**
+ * 
+ * if (nextOpenBracket == -1 || nextCloseBracket == -1) {
+ * break;
+ * }
+ * System.out.println(markdown.indexOf("]", nextOpenBracket));
+ * System.out.println(markdown.charAt(nextCloseBracket + 1));
+ * System.out.println(markdown.indexOf("(", -1));
+ * System.out.println(markdown.indexOf(")", markdown.indexOf("(", -1)));
+ * System.out.println(markdown.charAt(nextCloseBracket + 1) == '(');
+ */
