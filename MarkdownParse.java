@@ -23,8 +23,10 @@ public class MarkdownParse {
             if (markdown.charAt(nextCloseBracket + 1) == '(') {
                 int openParen = markdown.indexOf("(", nextCloseBracket);
                 int closeParen = markdown.indexOf(")", openParen);
-                if (markdown.charAt(closeParen + 1) == ')') {
-                    x -= 1;
+                if (closeParen + 1 != x) {
+                    if (markdown.charAt(closeParen + 1) == ')') {
+                        x -= 1;
+                    }
                 }
                 toReturn.add(markdown.substring(openParen + 1, closeParen));
                 currentIndex = closeParen + 1;
