@@ -28,8 +28,14 @@ public class MarkdownParse {
                         x -= 1;
                     }
                 }
-                toReturn.add(markdown.substring(openParen + 1, closeParen));
-                currentIndex = closeParen + 1;
+                if (markdown.substring(openParen + 1, closeParen).contains(".com")
+                        || markdown.substring(openParen + 1, closeParen).contains(".html")) {
+                    toReturn.add(markdown.substring(openParen + 1, closeParen));
+                    currentIndex = closeParen + 1;
+                } else {
+                    break;
+                }
+
             } else {
                 break;
             }
