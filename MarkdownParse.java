@@ -33,11 +33,11 @@ public class MarkdownParse {
                     toReturn.add(markdown.substring(openParen + 1, closeParen));
                     currentIndex = closeParen + 1;
                 } else {
-                    break;
+                    return null;
                 }
 
             } else {
-                break;
+                return null;
             }
         }
         return toReturn;
